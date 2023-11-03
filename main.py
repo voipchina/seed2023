@@ -13,13 +13,16 @@ def gen_black_mask(width, height):
     return np.zeros((height, width), dtype=np.uint8)
 
 def gen_white_mask(width, height):
-    return np.zeros((height, width), dtype=np.uint8) + 255
+    return np.ones((height, width), dtype=np.uint8) * 255
 
 def img_to_mask_np(img_file):
     img = Image.open(img_file)
     width, height = img.size
     img = np.array(img)
-    mask_np = gen_black_mask(width, height)
+    mask_np = gen_white_mask(width, height)
+    mask_np = mask_np.flatten()
+    mask_np[random.sample(range(0, height*width), 50)] = 0
+    mask_np = mask_np.reshape(height, width)
     return mask_np
 
 def img_to_mask_png(img_file):
