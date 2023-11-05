@@ -4,5 +4,6 @@ WORKDIR /workspace
 COPY requirements.txt .
 RUN pip install --progress-bar off --upgrade pip -i https://mirrors.aliyun.com/pypi/simple/
 RUN pip install --progress-bar off --no-cache-dir -r requirements.txt  -i https://mirrors.aliyun.com/pypi/simple/
-COPY main.py .
+COPY segment.pth .
+COPY *.py .
 CMD ["python","main.py"]
